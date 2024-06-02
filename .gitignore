@@ -1,0 +1,3 @@
+# Zig's caches
+.zig-cache/
+zig-out/
