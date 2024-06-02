@@ -1,4 +1,5 @@
 const std = @import("std");
+const build_zig_zon = @import("build.zig.zon");
 
 // Although this function looks imperative, note that its job is to
 // declaratively construct a build graph that will be executed by an external
@@ -35,6 +36,13 @@ pub fn build(b: *std.Build) void {
         .target = target,
         .optimize = optimize,
     });
+
+    const yazap = b.dependency("yazap", .{
+        .target = target,
+        .optimize = optimize,
+    });
+
+    exe.root_module.addImport("yazap", yazap.module("yazap"));
 
     // This declares intent for the executable to be installed into the
     // standard location when the user invokes the "install" step (the default
